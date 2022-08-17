@@ -43,6 +43,12 @@
           alt="Head shape selected"
         />Head</span
       >
+      <span class="icon-and-label" v-if="shape === 'custom'">
+        <img
+          src="@/assets/icons/Canvas-Custom.svg"
+          alt="Custom shape selected"
+        />Custom</span
+      >
       <img
         src="@/assets/icons/Dropdown.svg"
         v-bind:style="[
@@ -220,6 +226,18 @@
           ><img
             src="@/assets/icons/Canvas-Head.svg"
             alt="Set the 3d canvas shape to head"
+        /></label></span
+      ><span @click="setCanvasShape('custom')">
+        <input
+          type="radio"
+          id="shapeCustom"
+          name="shape"
+          value="custom"
+          v-model="shape"
+        /><label for="custom"
+          ><img
+            src="@/assets/icons/Canvas-Custom.svg"
+            alt="Set the 3d canvas shape to custom shape"
         /></label>
       </span>
     </div>
@@ -243,6 +261,7 @@ let raycaster;
 let canvasMirror;
 let geometry = new THREE.PlaneGeometry(5, 5);
 let headGeometry;
+let customGeometry;
 
 export default {
   name: "Canvas",
@@ -519,6 +538,23 @@ export default {
           } else {
             canvas.geometry.dispose();
             canvas.geometry = headGeometry;
+            canvas.geometry.needsUpdate = true;
+            renderer.render(scene, camera);
+          }
+          break;
+        case "custom":
+          if (customGeometry === undefined) {
+            const loader = new GLTFLoader();
+            loader.load("/custom.glb", function (gltf) {
+              customGeometry = gltf.scene.children[0].geometry;
+              canvas.geometry.dispose();
+              canvas.geometry = customGeometry;
+              canvas.geometry.needsUpdate = true;
+              renderer.render(scene, camera);
+            });
+          } else {
+            canvas.geometry.dispose();
+            canvas.geometry = customGeometry;
             canvas.geometry.needsUpdate = true;
             renderer.render(scene, camera);
           }
