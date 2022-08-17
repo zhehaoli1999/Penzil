@@ -17,3 +17,29 @@ See the [Roadmap](https://github.com/jacopocolo/Penzil/projects/1) for upcoming 
 
 - Penzil is a fully local application. No servers are involved. Because of the size of the files (and, partially, scope) saving and loading is currently done manually. You can save a .json file with your drawing and restore it with Load. Big files will take a long time to load as the geometries are not optimized yet.
 - Penzil exports in a format friendly to Blender's grease pencil but an importer is necessary. The importer doesn't exist yet but I have a Python script that can be run from Blender. If you want to import into Blender, join the Penzil Discord server. You can find the link in the app.
+
+
+## How to run Penzil.app locally
+
+- First install ``yarn``
+  - For MacOS:
+    ```
+    brew install yarn
+    ```
+  - For other OS:
+    Check the [official doc](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable)
+- Clone [camera-controls](https://github.com/jacopocolo/camera-controls) repo to the parent dir of Penzil, and run ``yarn add ../camera-controls/``
+ 
+- Then at the root folder of this project, run the commands below to install dependencies.
+    ```
+    yarn install 
+    ```
+- After installation finishes, run:
+  ```
+  yarn run serve
+  ```
+  Then in your browser go to http://localhost:8080/ to see the app.
+
+# How to add custom mesh as canvas
+- Simply rename your mesh glb file as "custom.glb" and put it in the "{project_root}/public/" folder, and you are all set. 
+  ![](./custom-canvas-preview.png)
