@@ -254,6 +254,7 @@
 import * as THREE from "three";
 import { TransformControls } from "./transformControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
 import { scene, renderer, camera, vm } from "../App.vue";
 
 export let canvas, controls, currentShape;
@@ -544,9 +545,9 @@ export default {
           break;
         case "custom":
           if (customGeometry === undefined) {
-            const loader = new GLTFLoader();
-            loader.load("/custom.glb", function (gltf) {
-              customGeometry = gltf.scene.children[0].geometry;
+            const loader = new OBJLoader();
+            loader.load("/custom.obj", function (obj) {
+              customGeometry = obj.children[0].geometry;
               canvas.geometry.dispose();
               canvas.geometry = customGeometry;
               canvas.geometry.needsUpdate = true;
@@ -555,7 +556,7 @@ export default {
           } else {
             canvas.geometry.dispose();
             canvas.geometry = customGeometry;
-            canvas.geometry.needsUpdate = true;
+            canvas.geometry.needsUpdate = true; 
             renderer.render(scene, camera);
           }
           break;

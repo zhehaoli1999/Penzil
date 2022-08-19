@@ -41,5 +41,6 @@ See the [Roadmap](https://github.com/jacopocolo/Penzil/projects/1) for upcoming 
   Then in your browser go to http://localhost:8080/ to see the app.
 
 # How to add custom mesh as canvas
-- Simply rename your mesh glb file as "custom.glb" and put it in the "{project_root}/public/" folder, and you are all set. 
+- Currently we support `obj` and `glb` format. 
+- Simply rename your mesh glb file as `custom.obj` or `custom.glb` and put it in the `{project_root}/public/` folder, and you are all set. 
   ![](./custom-canvas-preview.png)
